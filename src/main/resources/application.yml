@@ -1,0 +1,31 @@
+spring:
+  application:
+    name:
+      backend-1st
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/hr?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate # "update"는 개발 단계에서 사용. 운영 환경에서는 "validate" 또는 "none" 권장
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+api:
+  public-data:
+    service-key:
+    type : json
+
+

@@ -8,5 +8,5 @@ public interface DepartmentController {
 
     ResponseEntity<ApiResponse<Page<DepartmentDto>>> getDepartmentInfo(int page,int size);
 
-    ResponseEntity<Void> increaseSalaryByPercentage(Integer departmentId, Double percentage);
+    ResponseEntity<ApiResponse<Void>> increaseSalaryByPercentage(Integer departmentId, Double percentage);
 }

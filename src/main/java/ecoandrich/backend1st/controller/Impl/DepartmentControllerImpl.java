@@ -26,9 +26,9 @@ public class DepartmentControllerImpl implements DepartmentController {
 
 
     @PutMapping("/{departmentId}/salary/increase")
-    public ResponseEntity<Void> increaseSalaryByPercentage(
+    public ResponseEntity<ApiResponse<Void>> increaseSalaryByPercentage(
             @PathVariable Integer departmentId, @RequestParam Double percentage) {
         departmentService.increaseSalaryByPercentage(departmentId, percentage);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ApiResponse.success(null));
     }
 }

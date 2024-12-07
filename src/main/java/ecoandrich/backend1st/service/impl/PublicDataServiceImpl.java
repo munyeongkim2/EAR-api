@@ -1,9 +1,7 @@
 package ecoandrich.backend1st.service.impl;
 
 import ecoandrich.backend1st.client.PublicDataClient;
-import ecoandrich.backend1st.common.exception.ErrorCode;
-import ecoandrich.backend1st.common.exception.FeignClientException;
-import ecoandrich.backend1st.common.exception.NotFoundException;
+import ecoandrich.backend1st.common.exception.*;
 import ecoandrich.backend1st.domain.Bs;
 import ecoandrich.backend1st.dto.BsDto;
 import ecoandrich.backend1st.dto.PublicDataResponse;
@@ -49,9 +47,12 @@ public class PublicDataServiceImpl implements PublicDataService {
         for (int i = 0; i < bsList.size(); i += batchSize) {
             int end = Math.min(i + batchSize, bsList.size());
             List<Bs> batch = bsList.subList(i, end);
-            bsRepository.saveAll(batch);
+            try {
+                bsRepository.saveAll(batch);
+            } catch (Exception e) {
+                throw new InternalServerException(ErrorCode.DUPLICATED_VALUE);
+            }
         }
-
     }
 
     @Transactional(readOnly = true)

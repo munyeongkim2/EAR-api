@@ -35,7 +35,7 @@ public class EmployeeControllerImpl implements EmployeeController {
     @PutMapping("/{employeeId}")
     public ResponseEntity<ApiResponse<Void>> updateEmployee(@PathVariable Integer employeeId, @RequestBody @Valid UpdateEmployeeRequest request) {
         employeeService.update(employeeId, request);
-        return ResponseEntity.ok(ApiResponse.success(null));
+        return ResponseEntity.noContent().build();
     }
 
 }

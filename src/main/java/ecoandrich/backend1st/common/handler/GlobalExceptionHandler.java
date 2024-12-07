@@ -4,6 +4,7 @@ import ecoandrich.backend1st.common.Response.ApiResponse;
 import ecoandrich.backend1st.common.Response.ErrorResponse;
 import ecoandrich.backend1st.common.Response.ValidErrorResponse;
 import ecoandrich.backend1st.common.exception.ErrorCode;
+import ecoandrich.backend1st.common.exception.InternalServerException;
 import ecoandrich.backend1st.common.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiResponse<ErrorResponse>> handle(NotFoundException exception) {
+        log.error("NotFoundException: {} | Location: {}", exception.getMessage(), getLocation(exception), exception);
+        ErrorResponse errorResponse = ErrorResponse.from(exception);
+        return ResponseEntity.status(errorResponse.errorCode().getStatusCode()).body(ApiResponse.error(errorResponse));
+    }
+
+    @ExceptionHandler(InternalServerException.class)
+    public ResponseEntity<ApiResponse<ErrorResponse>> handle(InternalServerException exception) {
         log.error("NotFoundException: {} | Location: {}", exception.getMessage(), getLocation(exception), exception);
         ErrorResponse errorResponse = ErrorResponse.from(exception);
         return ResponseEntity.status(errorResponse.errorCode().getStatusCode()).body(ApiResponse.error(errorResponse));

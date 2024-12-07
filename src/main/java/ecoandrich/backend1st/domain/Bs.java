@@ -1,14 +1,11 @@
 package ecoandrich.backend1st.domain;
 
 import ecoandrich.backend1st.dto.BsDto;
-import ecoandrich.backend1st.dto.PublicDataResponse;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,6 +15,7 @@ public class Bs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     @Column(unique = true)
     Long bsId;
 

@@ -6,8 +6,16 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/hr?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
     username: root
-    password:
+    password: jjjk
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+    hikari:
+      connectionTimeout: 30000       # 커넥션을 가져오기 위해 기다리는 최대 시간 (30초)
+      maximumPoolSize: 10            # 최대 커넥션 풀 사이즈 (t2.micro에 적합)
+      minimumIdle: 5                # 최소 유휴 커넥션 수 (CPU와 메모리가 제한적이므로 적정 수 유지)
+      idleTimeout: 300000           # 유휴 커넥션을 유지할 최대 시간 (5분)
+      maxLifetime: 1800000          # 커넥션의 최대 생명 주기 (30분)
+      poolName: HikariPool-1
 
   jpa:
     hibernate:
@@ -25,7 +33,7 @@ logging:
 
 api:
   public-data:
-    service-key:
+    service-key: "E1J7wlwI48DCVsmkCt8HlwmZZGr7nPyGWCnl8aLG%2F88xdjfgcJiEqQ0nRRh5JFPw%2BvEOHo%2FBIDzqLpj3nvrFWw%3D%3D"
     type : json
 
 
